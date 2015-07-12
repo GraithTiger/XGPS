@@ -45,56 +45,56 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-simplepolargraph.lss \
+xgps.lss \
 
 FLASH_IMAGE += \
-simplepolargraph.hex \
+xgps.hex \
 
 EEPROM_IMAGE += \
-simplepolargraph.eep \
+xgps.eep \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: simplepolargraph.elf secondary-outputs
+all: xgps.elf secondary-outputs
 
 # Tool invocations
-simplepolargraph.elf: $(OBJS) $(USER_OBJS)
+xgps.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc -Os -Wl,--gc-sections  -L"C:\Users\Jacob\Documents\Arduino\Arduino_Mega_2560_or_Mega_ADK/Release" -mmcu=atmega2560  -o"simplepolargraph.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
+	avr-gcc -Os -Wl,--gc-sections  -L"C:\Users\Jacob\Documents\Arduino\Arduino_Mega_2560_or_Mega_ADK/Release" -mmcu=atmega2560  -o"xgps.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-simplepolargraph.lss: simplepolargraph.elf
+xgps.lss: xgps.elf
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S simplepolargraph.elf  >"simplepolargraph.lss"
+	-avr-objdump -h -S xgps.elf  >"xgps.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-simplepolargraph.hex: simplepolargraph.elf
+xgps.hex: xgps.elf
 	@echo 'Create Flash image (ihex format)'
-	-avr-objcopy -R .eeprom -O ihex simplepolargraph.elf  "simplepolargraph.hex"
+	-avr-objcopy -R .eeprom -O ihex xgps.elf  "xgps.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-simplepolargraph.eep: simplepolargraph.elf
+xgps.eep: xgps.elf
 	@echo 'Create eeprom image (ihex format)'
-	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex simplepolargraph.elf  "simplepolargraph.eep"
+	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex xgps.elf  "xgps.eep"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: simplepolargraph.elf
+sizedummy: xgps.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega2560 simplepolargraph.elf
+	-avr-size --format=avr --mcu=atmega2560 xgps.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) simplepolargraph.elf
+	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) xgps.elf
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(FLASH_IMAGE) $(EEPROM_IMAGE) $(SIZEDUMMY)

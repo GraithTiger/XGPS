@@ -9,6 +9,7 @@
 #define ALLEGROSTEPPER_H_
 #include <Arduino.h>
 
+//Defining constants
 #define CW 1
 #define CCW 0
 
