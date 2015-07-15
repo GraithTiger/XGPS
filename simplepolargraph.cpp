@@ -24,7 +24,7 @@ void loop()
 {
 	char in;
 	//execute commands if available
-	if (Serial.available())
+	if (Serial.available()>0)
 	{
 		 in = Serial.read();
 		 //TODO: Add GCODE PARSER

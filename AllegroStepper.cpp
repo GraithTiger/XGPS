@@ -22,16 +22,16 @@ void AllegroStepper::initialize()
 	pinMode(dirPin,OUTPUT);
 	pinMode(enablePin,OUTPUT);
 	disable(); //start with motors disabled
-	digitalWrite(stepPin, LOW); //actively keep step pin low
+	digitalWrite(stepPin, LOW); //actively dkeep step pin low
 }
 
-void AllegroStepper::enable() //enables stepper motor drive. Keeps enable pin low.
+void AllegroStepper::enable() //enables stepper motor driver. Keeps enable pin low.
 {
 	digitalWrite(enablePin,LOW);
 	enabled = true;
 }
 
-void AllegroStepper::disable() //disables stepper motor drive. Keeps enable pin high.
+void AllegroStepper::disable() //disables stepper motor driver. Keeps enable pin high.
 {
 	digitalWrite(enablePin,HIGH);
 	enabled = false;
