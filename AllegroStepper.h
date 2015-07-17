@@ -25,8 +25,5 @@ public:
 	void disable();
 };
 
-#ifndef Stepper_h
-extern AllegroStepper Stepper;
-#endif
 
 #endif /* ALLEGROSTEPPER_H_ */

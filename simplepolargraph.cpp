@@ -3,6 +3,7 @@
 #include "pins.h"
 #include <HardwareSerial.h>
 #include "AllegroStepper.h"
+#include "Geometry.h"
 
 //set origin positions
 float aPos=300;
@@ -10,6 +11,7 @@ float bPos=300;
 //initialize stepper motor object
 AllegroStepper a = AllegroStepper(A_STEP_PIN,A_DIR_PIN,A_ENABLE_PIN);
 AllegroStepper b = AllegroStepper(B_STEP_PIN,B_DIR_PIN,B_ENABLE_PIN);
+Geometry pos = Geometry(&a, &b);
 
 //The setup function is called once at startup of the sketch
 void setup()
@@ -18,6 +20,7 @@ void setup()
 	Serial.begin(9600);
 	a.initialize();
 	b.initialize();
+	pos.setOrigin(914.4,914.4);
 }
 
 void loop()
@@ -30,7 +33,7 @@ void loop()
 		 //TODO: Add GCODE PARSER
 		 switch (in) //TEST COMMANDS
 		 {
-		 	 case 'd':
+		 	 case 'q':
 		 		 a.disable();
 		 		 b.disable();
 		 		 break;
@@ -38,18 +41,31 @@ void loop()
 		 		 a.enable();
 		 		 b.enable();
 		 		 break;
-		 	 case 'a':
-		 		 stepperTest(a,800,CW); //spin a-axis motor and reverse
-				 stepperTest(a,800,CCW);
+		 	 case 'w':
+		 		 pos.gotoPos(pos.getX(),pos.getY()+2,100);
+		 		 Serial.print((double)pos.getX());
+		 		 Serial.print(',');
+		 		 Serial.println((double)pos.getY());
 		 		 break;
-		 	 case 'b':
-		 		stepperTest(b,800,CW); //spin b-axis motor and reverse
-		 		stepperTest(b,800,CCW);
-		 		break;
-		 	 case 'c':
-		 		stepperTest(800,CW); //spin both motors and reverse
-		 		stepperTest(800,CCW);
-		 		break;
+		 	 case 'a':
+		 		 pos.gotoPos(pos.getX()-2,pos.getY(),100);
+		 		 Serial.print((double)pos.getX());
+		 		 Serial.print(',');
+		 		 Serial.println((double)pos.getY());
+		 		 break;
+		 	 case 's':
+		 		 pos.gotoPos(pos.getX(),pos.getY()-2,100);
+		 		 Serial.print((double)pos.getX());
+		 		 Serial.print(',');
+		 		 Serial.println((double)pos.getY());
+		 		 break;
+		 	 case 'd':
+		 		 pos.gotoPos(pos.getX()+2,pos.getY(),100);
+		 		 Serial.print((double)pos.getX());
+		 		 Serial.print(',');
+		 		 Serial.println((double)pos.getY());
+		 		 break;
+
 		 }
 	}
 //Add your repeated code here

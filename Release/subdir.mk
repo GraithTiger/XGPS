@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../AllegroStepper.cpp \
+../geometry.cpp \
 ../simplepolargraph.cpp 
 
 OBJS += \
 ./AllegroStepper.o \
+./geometry.o \
 ./simplepolargraph.o 
 
 CPP_DEPS += \
 ./AllegroStepper.d \
+./geometry.d \
 ./simplepolargraph.d 
 
 

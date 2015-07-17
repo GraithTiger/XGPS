@@ -11,7 +11,8 @@ simplepolargraph.d simplepolargraph.o: ../simplepolargraph.cpp \
   C:\Program\ Files\Arduino\hardware\arduino\cores\arduino/new.h \
   C:\Program\ Files\Arduino\hardware\arduino\variants\mega/pins_arduino.h \
   ../AllegroStepper.h ../pins.h \
-  C:\Program\ Files\Arduino\hardware\arduino\cores\arduino/HardwareSerial.h
+  C:\Program\ Files\Arduino\hardware\arduino\cores\arduino/HardwareSerial.h \
+  ../Geometry.h
 
 ../simplepolargraph.h:
 
@@ -40,3 +41,5 @@ C:\Program\ Files\Arduino\hardware\arduino\variants\mega/pins_arduino.h:
 ../pins.h:
 
 C:\Program\ Files\Arduino\hardware\arduino\cores\arduino/HardwareSerial.h:
+
+../Geometry.h:
