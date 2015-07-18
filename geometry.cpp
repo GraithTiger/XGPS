@@ -36,32 +36,32 @@ bool Geometry::gotoPos(float x, float y, float vel) //go to specified position i
 {
 	if (!isHomed) //do nothing if system not homed
 		return false;
-	Serial.print(a_pos);
-	Serial.print('-');
-	Serial.println(b_pos);
+	//Serial.print(a_pos);
+	//Serial.print('-');
+	//Serial.println(b_pos);
 	float delta_x = x-x_pos;
 	float delta_y = y-y_pos;
 	float length = sqrt(delta_x*delta_x+delta_y*delta_y); //get length of path in mm
 	float* newAB = xyToab(x+x_offset,y+y_offset, AB_DISTANCE);
 	float delta_a = newAB[0]-a_pos;
 	float delta_b = newAB[1]-b_pos;
-	if (delta_a>A_MAX_LENGTH)
+	/*if (delta_a>A_MAX_LENGTH)
 		delta_a = A_MAX_LENGTH;
 	else if (delta_a<A_MIN_LENGTH)
 		delta_a = A_MIN_LENGTH;
 	else if (delta_b>B_MAX_LENGTH)
 		delta_b = B_MAX_LENGTH;
 	else if (delta_b<B_MIN_LENGTH)
-		delta_b = B_MIN_LENGTH;
+		delta_b = B_MIN_LENGTH;*/
 	int steps_a = delta_a * A_STEPS_PER_MM;
-	int steps_b = delta_b * A_STEPS_PER_MM;
+	int steps_b = delta_b * B_STEPS_PER_MM;
 	long time = 1000000L*(length/vel);
-	Serial.print(steps_a);
-	Serial.print(':');
-	Serial.print(steps_b);
-	Serial.print(':');
-	Serial.println(time);
-	//move(steps_a, steps_b, time);
+	//Serial.print(steps_a);
+	//Serial.print(':');
+	//Serial.print(steps_b);
+	//Serial.print(':');
+	//Serial.println(time);
+	move(steps_a, steps_b, time);
 	x_pos = x;
 	y_pos = y;
 	a_pos = newAB[0];
@@ -76,8 +76,8 @@ float Geometry::getRealY() {return y_pos+y_offset;}
 
 void Geometry::move(int aSteps,int bSteps, long us)
 {
-	byte aDir = aSteps>0;
-	byte bDir = bSteps>0;
+	bool aDir = aSteps>0;
+	bool bDir = bSteps>0;
 	aSteps = abs(aSteps);
 	bSteps = abs(bSteps);
 	long aInt = us/aSteps;
@@ -93,16 +93,16 @@ void Geometry::move(int aSteps,int bSteps, long us)
 			a_mot->step(aDir);
 			nextA = curTime+aInt;
 			aSteps--;
-			Serial.print("a:");
-			Serial.println(aSteps);
+			//Serial.print("a:");
+			//Serial.println(aSteps);
 		}
 		if (curTime>nextB && bSteps>0)
 		{
 			b_mot->step(bDir);
 			nextB = curTime+aInt;
 			bSteps--;
-			Serial.print("b:");
-			Serial.println(bSteps);
+			//Serial.print("b:");
+			//Serial.println(bSteps);
 		}
 	}
 
@@ -126,6 +126,6 @@ float* abToxy(float a, float b, float d) //converts (a,b) coordinates into absol
 {
 	float* xy = new float[2];
 	xy[0] = (a*a-b*b+d*d)/(2*d); // find x
-	xy[1] = -a*sqrt(1-(a*a-b*b+d*d)/(2*a*d)); //find y
+	xy[1] = -a*sqrt(1-pow((a*a-b*b+d*d)/(2*a*d),2)); //find y
 	return xy;
 }

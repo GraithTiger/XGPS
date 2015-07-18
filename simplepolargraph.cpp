@@ -42,28 +42,32 @@ void loop()
 		 		 b.enable();
 		 		 break;
 		 	 case 'w':
-		 		 pos.gotoPos(pos.getX(),pos.getY()+2,100);
+		 		 pos.gotoPos(pos.getX(),pos.getY()+20,100);
 		 		 Serial.print((double)pos.getX());
 		 		 Serial.print(',');
 		 		 Serial.println((double)pos.getY());
 		 		 break;
 		 	 case 'a':
-		 		 pos.gotoPos(pos.getX()-2,pos.getY(),100);
+		 		 pos.gotoPos(pos.getX()-20,pos.getY(),100);
 		 		 Serial.print((double)pos.getX());
 		 		 Serial.print(',');
 		 		 Serial.println((double)pos.getY());
 		 		 break;
 		 	 case 's':
-		 		 pos.gotoPos(pos.getX(),pos.getY()-2,100);
+		 		 pos.gotoPos(pos.getX(),pos.getY()-20,100);
 		 		 Serial.print((double)pos.getX());
 		 		 Serial.print(',');
 		 		 Serial.println((double)pos.getY());
 		 		 break;
 		 	 case 'd':
-		 		 pos.gotoPos(pos.getX()+2,pos.getY(),100);
+		 		 pos.gotoPos(pos.getX()+20,pos.getY(),100);
 		 		 Serial.print((double)pos.getX());
 		 		 Serial.print(',');
 		 		 Serial.println((double)pos.getY());
+		 		 break;
+		 	 case 'p':
+		 		 stepperTest(a,800,1);
+		 		 stepperTest(a,800,0);
 		 		 break;
 
 		 }

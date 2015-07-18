@@ -16,7 +16,7 @@
 #define TWO_AXIS			0
 #define THREE_AXIS			1
 
-#define A_STEPS_PER_MM		-8.488263
+#define A_STEPS_PER_MM		8.488263
 #define B_STEPS_PER_MM		-8.488263
 
 #define AB_DISTANCE			1220
